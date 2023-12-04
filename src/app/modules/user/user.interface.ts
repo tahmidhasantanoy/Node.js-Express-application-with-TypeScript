@@ -1,19 +1,19 @@
 // import { Schema, model, connect } from "mongoose";
 
-type TName = {
+export type TName = {
   firstName: string;
   lastName: string;
 };
-type TAddress = {
+export type TAddress = {
   street: string;
   city: string;
   country: string;
 };
 
-type TOrder = {
+export type TOrder = {
   productName: string;
   price: string;
-  quality: string;
+  quantity: string;
 };
 
 export type User = {
