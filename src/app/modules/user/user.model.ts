@@ -1,5 +1,5 @@
-import { Schema, model, /* connect */ } from "mongoose";
-import { TAddress, TName, TOrder, User } from "./user.interface";
+import { Schema, model /* connect */ } from "mongoose";
+import { TAddress, TName, TOrder, TUser } from "./user.interface";
 
 const userFullNameSchema = new Schema<TName>({
   firstName: { type: String, required: true },
@@ -18,7 +18,7 @@ const userOrderSchema = new Schema<TOrder>({
   quantity: { type: String, required: true },
 });
 
-const userSchema = new Schema<User>({
+const userSchema = new Schema<TUser>({
   userId: { type: String, required: true },
   userName: { type: String, required: true },
   password: { type: String, required: true },
@@ -31,4 +31,4 @@ const userSchema = new Schema<User>({
   orders: userOrderSchema,
 });
 
-export const userModel = model<User>("User", userSchema);
+export const userModel = model<TUser>("User", userSchema);

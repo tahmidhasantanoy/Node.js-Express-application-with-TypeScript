@@ -16,7 +16,7 @@ export type TOrder = {
   quantity: string;
 };
 
-export type User = {
+export type TUser = {
   userId: string;
   userName: string;
   password: string;
