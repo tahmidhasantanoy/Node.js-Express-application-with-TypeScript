@@ -1,4 +1,3 @@
-// import mongoose from "mongoose";
 import mongoose from "mongoose";
 import { TUser } from "./user.interface";
 import { userModel } from "./user.model";
@@ -10,6 +9,7 @@ const createUserToDB = async (userData: TUser) => {
     .model("User")
     .find({})
     .select("-password");
+  /* try to minimize */
 
   return usersWithoutPassword;
 };

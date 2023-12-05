@@ -26,6 +26,11 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  
+};
+
 export default {
   createUser,
+  getAllUsers,
 };

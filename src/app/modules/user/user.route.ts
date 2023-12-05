@@ -6,4 +6,6 @@ router.use(express.json());
 
 router.post("/", userController.createUser);
 
+router.get("/", userController.getAllUsers);
+
 export const userRouters = router;
