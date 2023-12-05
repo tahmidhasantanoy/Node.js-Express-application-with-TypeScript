@@ -14,8 +14,8 @@ const createUserToDB = async (userData: TUser) => {
   return usersWithoutPassword;
 };
 
-const getAllUsersFromDB = async () => {
-  const getUsersFromDB = await userModel.find();
+const getAllUserFromDB = async () => {
+  const usersFromDB = await userModel.find();
 
   const requireFieldData = await mongoose
     .model("User")
@@ -24,7 +24,13 @@ const getAllUsersFromDB = async () => {
   return requireFieldData;
 };
 
+const getSingleUserFromDB = async (singleUserData: number) => {
+  const singleUserFromDB = await userModel.find({ userId: singleUserData });
+  return singleUserFromDB;
+};
+
 export default {
   createUserToDB,
-  getAllUsersFromDB,
+  getAllUserFromDB,
+  getSingleUserFromDB,
 };

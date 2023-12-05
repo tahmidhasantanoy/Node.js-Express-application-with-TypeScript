@@ -14,7 +14,7 @@ const createUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Successfully user data stored in database",
+      message: "User created successfully!",
       result: serviceResult,
     });
   } catch (err: any) {
@@ -28,7 +28,7 @@ const createUser = async (req: Request, res: Response) => {
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const result = await userService.getAllUsersFromDB();
+    const result = await userService.getAllUserFromDB();
 
     res.status(200).json({
       success: true,
@@ -44,7 +44,28 @@ const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleUser = async (req: Request, res: Response) => {
+  try {
+    const singleUser = Number(req.params);
+
+    const singleUserResult = await userService.getSingleUserFromDB(singleUser);
+
+    res.status(200).json({
+      success: true,
+      message: "User fetched successfully!",
+      data: singleUserResult,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Something went wrong",
+      result: err,
+    });
+  }
+};
+
 export default {
   createUser,
   getAllUsers,
+  getSingleUser,
 };
