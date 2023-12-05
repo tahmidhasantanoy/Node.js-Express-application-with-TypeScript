@@ -39,7 +39,7 @@ const userSchema = new Schema<TUser>({
   hobbies: ["Reading", "Coding", "Hiking"],
   address: userAddressSchema,
   orders: userOrderSchema,
-  isDeleted : {type : Boolean , default : false}
+  isDeleted: { type: Boolean, default: false },
 });
 
 // Mongoose Middleware :
@@ -52,6 +52,12 @@ userSchema.pre("save", async function () {
 
 userSchema.post("save", async function (doc, next) {
   console.log("after stored");
+
+  next();
+});
+
+userSchema.pre("find", function (next) {
+  this.find({ isDeleted: { $ne: true } }); //will send isDeleted : false
 
   next();
 });
