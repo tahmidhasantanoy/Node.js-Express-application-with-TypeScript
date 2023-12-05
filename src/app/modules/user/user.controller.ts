@@ -32,7 +32,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Retrive all users data",
+      message: "Users fetched successfully!",
       data: result,
     });
   } catch (err: any) {

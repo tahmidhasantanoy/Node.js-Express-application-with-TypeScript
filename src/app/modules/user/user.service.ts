@@ -16,7 +16,12 @@ const createUserToDB = async (userData: TUser) => {
 
 const getAllUsersFromDB = async () => {
   const getUsersFromDB = await userModel.find();
-  return getUsersFromDB;
+
+  const requireFieldData = await mongoose
+    .model("User")
+    .find({}, { userName: 1, fullName: 1, age: 1, email: 1, address: 1 });
+
+  return requireFieldData;
 };
 
 export default {
