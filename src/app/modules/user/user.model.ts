@@ -39,4 +39,16 @@ const userSchema = new Schema<TUser>({
   orders: userOrderSchema,
 });
 
+// Mongoose Middleware :
+userSchema.pre("save", function () {
+  const password = this.password;
+  console.log(password);
+  console.log("before stored");
+});
+
+userSchema.post("save", function (doc, next) {
+  console.log("after stored");
+  next();
+});
+
 export const userModel = model<TUser>("User", userSchema);
