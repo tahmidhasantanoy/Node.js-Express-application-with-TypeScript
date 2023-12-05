@@ -49,8 +49,9 @@ userSchema.pre("save", async function () {
   // console.log("before stored");
 });
 
-userSchema.post("save", function (doc, next) {
+userSchema.post("save", async function (doc, next) {
   console.log("after stored");
+
   next();
 });
 

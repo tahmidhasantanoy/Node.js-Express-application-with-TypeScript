@@ -14,7 +14,7 @@ const createUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Successfully user stored in database",
+      message: "Successfully user data stored in database",
       result: serviceResult,
     });
   } catch (err: any) {
