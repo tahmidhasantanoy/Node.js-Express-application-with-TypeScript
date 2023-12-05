@@ -1,5 +1,7 @@
 import { Schema, model /* connect */ } from "mongoose";
 import { TAddress, TName, TOrder, TUser } from "./user.interface";
+import bcrypt from "bcrypt";
+import config from "../../config";
 
 const userFullNameSchema = new Schema<TName>({
   firstName: { type: String, required: true },
@@ -40,10 +42,11 @@ const userSchema = new Schema<TUser>({
 });
 
 // Mongoose Middleware :
-userSchema.pre("save", function () {
+userSchema.pre("save", async function () {
   const password = this.password;
-  console.log(password);
-  console.log("before stored");
+
+  this.password = await bcrypt.hash(password, Number(config.saltRound));
+  // console.log("before stored");
 });
 
 userSchema.post("save", function (doc, next) {
