@@ -14,6 +14,12 @@ const createUserToDB = async (userData: TUser) => {
   return usersWithoutPassword;
 };
 
+const getAllUsersFromDB = async () => {
+  const getUsersFromDB = await userModel.find();
+  return getUsersFromDB;
+};
+
 export default {
   createUserToDB,
+  getAllUsersFromDB,
 };
