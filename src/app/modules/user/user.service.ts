@@ -26,7 +26,12 @@ const getAllUserFromDB = async () => {
 
 const getSingleUserFromDB = async (singleUserData: number) => {
   const singleUserFromDB = await userModel.find({ userId: singleUserData });
-  return singleUserFromDB;
+
+  const SingleUserWithoutPassword = await mongoose
+    .model("User")
+    .find({ userId: singleUserData })
+    .select("-password");
+  return SingleUserWithoutPassword;
 };
 
 export default {
