@@ -46,9 +46,11 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 const getSingleUser = async (req: Request, res: Response) => {
   try {
-    const {userId} = req.params
+    const { userId } = req.params;
 
-    const singleUserResult = await userService.getSingleUserFromDB(Number(userId));
+    const singleUserResult = await userService.getSingleUserFromDB(
+      Number(userId)
+    );
 
     res.status(200).json({
       success: true,
@@ -64,8 +66,32 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
+const deleteAUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+
+    const deleteUserResult = await userService.deleteSingleUserFromDB(
+      Number(userId)
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully!",
+      data: deleteUserResult,
+    });
+  } catch (err : any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Something went wrong",
+      result: err,
+    });
+  }
+};
+
 export default {
   createUser,
   getAllUsers,
   getSingleUser,
+  deleteAUser,
 };

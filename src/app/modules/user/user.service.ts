@@ -34,8 +34,19 @@ const getSingleUserFromDB = async (singleUserData: number) => {
   return SingleUserWithoutPassword;
 };
 
+const deleteSingleUserFromDB = async (deleteUserData: number) => {
+  const deleteUserFromDB = await userModel.updateOne(
+    {
+      userId: deleteUserData,
+    },
+    { isDeleted: true }
+  );
+  return deleteUserFromDB;
+};
+
 export default {
   createUserToDB,
   getAllUserFromDB,
   getSingleUserFromDB,
+  deleteSingleUserFromDB,
 };

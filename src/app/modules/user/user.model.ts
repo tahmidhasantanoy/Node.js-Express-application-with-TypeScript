@@ -39,6 +39,7 @@ const userSchema = new Schema<TUser>({
   hobbies: ["Reading", "Coding", "Hiking"],
   address: userAddressSchema,
   orders: userOrderSchema,
+  isDeleted : {type : Boolean , default : false}
 });
 
 // Mongoose Middleware :
