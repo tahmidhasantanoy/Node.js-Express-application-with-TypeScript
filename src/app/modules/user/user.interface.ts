@@ -17,7 +17,7 @@ export type TOrder = {
 };
 
 export type TUser = {
-  userId: string;
+  userId: number;
   userName: string;
   password: string;
   fullName: TName;

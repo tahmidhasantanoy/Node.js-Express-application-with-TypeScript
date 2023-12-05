@@ -19,7 +19,7 @@ const userOrderSchema = new Schema<TOrder>({
 });
 
 const userSchema = new Schema<TUser>({
-  userId: { type: String, required: true },
+  userId: { type: Number, required: true },
   userName: { type: String, required: true },
   password: { type: String, required: true },
   fullName: userFullNameSchema,
