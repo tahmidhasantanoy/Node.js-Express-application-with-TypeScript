@@ -10,6 +10,8 @@ import cors from "cors";
 app.use(express.json());
 app.use(cors());
 
+app.use("/api/users/",user)
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Sending response to Node.js Express application");
 });
