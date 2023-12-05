@@ -12,8 +12,8 @@ export type TAddress = {
 
 export type TOrder = {
   productName: string;
-  price: string;
-  quantity: string;
+  price: number;
+  quantity: number;
 };
 
 export type TUser = {
