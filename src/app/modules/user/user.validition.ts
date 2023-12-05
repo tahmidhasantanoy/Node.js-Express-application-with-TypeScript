@@ -7,18 +7,18 @@ const userFullNameValidationSchema = z.object({
 
 const userAddressValidationSchema = z.object({
   street: z.string(),
-  price: z.string(),
-  quantity: z.string(),
+  city: z.string(),
+  country: z.string(),
 });
 
 const userOrdersValidationSchema = z.object({
   productName: z.string(),
-  price: z.string(),
-  quantity: z.string(),
+  price: z.number(),
+  quantity: z.number(),
 });
 
 const userValidationSchema = z.object({
-  userId: z.string(),
+  userId: z.number(),
   userName: z.string(),
   password: z.string(),
   fullName: userFullNameValidationSchema,
