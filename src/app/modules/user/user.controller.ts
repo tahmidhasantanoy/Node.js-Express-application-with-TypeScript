@@ -7,9 +7,17 @@ const createUser = async (req: Request, res: Response) => {
 
     const serviceResult = await userService.createUserToDB(userData);
 
-    
+    res.status(200).json({
+      success: true,
+      message: "Successfully user stored in database",
+      result: serviceResult,
+    });
   } catch (err: any) {
-    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: err.message || "Something went wrong",
+      result: err,
+    });
   }
 };
 
