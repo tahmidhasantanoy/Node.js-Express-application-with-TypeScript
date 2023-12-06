@@ -70,7 +70,7 @@ userSchema.post("save", async function (doc, next) {
 });
 
 userSchema.pre("find", function (next) {
-  this.find({ isDeleted: { $ne: true } }); //will send isDeleted : false
+  this.find({ isDeleted: { $ne: true } }); 
 
   next();
 });

@@ -19,7 +19,7 @@ const createUserToDB = async (userData: TUser) => {
     email: 1,
     address: 1,
   });
-  /* try to minimize */
+
 
   return usersWithoutPassword;
 };
@@ -71,7 +71,7 @@ const updateSingleUserToDB = async (
       hobbies: 1,
       address: 1,
     });
-  // .updateOne();
+
 
   console.log(updateUserToDB);
   return updateUserToDB;

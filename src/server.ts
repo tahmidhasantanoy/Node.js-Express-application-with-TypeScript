@@ -16,6 +16,6 @@ async function main() {
   }
 }
 
-// console.log(process.cwd()); //not show cwd
+
 
 main();
