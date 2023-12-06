@@ -60,8 +60,11 @@ const getSingleUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "Something went wrong",
-      result: err,
+      message: "User not found!",
+      err: {
+        code: 404,
+        description: "User not found!",
+      },
     });
   }
 };
@@ -74,7 +77,8 @@ const updateSingleUser = async (req: Request, res: Response) => {
     // console.log(userId,updateData);
 
     const updateUserResult = await userService.updateSingleUserToDB(
-      Number(userId),updateData
+      Number(userId),
+      updateData
     );
 
     res.status(200).json({
@@ -85,8 +89,11 @@ const updateSingleUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "Something went wrong",
-      result: err,
+      message: "User not found!",
+      err: {
+        code: 404,
+        description: "User not found!",
+      },
     });
   }
 };
@@ -103,13 +110,16 @@ const deleteAUser = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: "User deleted successfully!",
-      data: deleteUserResult,
+      data: deleteUserResult.upsertedId,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "Something went wrong",
-      result: err,
+      message: "User not found!",
+      err: {
+        code: 404,
+        description: "User not found!",
+      },
     });
   }
 };

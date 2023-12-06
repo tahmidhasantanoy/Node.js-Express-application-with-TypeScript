@@ -48,7 +48,7 @@ const updateSingleUserToDB = async (
   updateUserId: number,
   updateUserData: TUser
 ) => {
-  
+
   if (!(await userModel.isUserExist(updateUserId))) {
     throw new Error("User is not exist!");
   }
@@ -63,7 +63,7 @@ const updateSingleUserToDB = async (
 
 const deleteSingleUserFromDB = async (deleteUserData: number) => {
   if (!(await userModel.isUserExist(deleteUserData))) {
-    throw new Error("User already deleted!");
+    throw new Error("User is not exist!");
   }
 
   const deleteUserFromDB = await userModel.updateOne(
