@@ -10,10 +10,15 @@ const createUserToDB = async (userData: TUser) => {
 
   const storeUserData = await userModel.create(userData);
 
-  const usersWithoutPassword = await mongoose
-    .model("User")
-    .find({})
-    .select("-password");
+  const usersWithoutPassword = await mongoose.model("User").find({}).select({
+    _id: 0,
+    userId: 1,
+    userName: 1,
+    fullName: 1,
+    age: 1,
+    email: 1,
+    address: 1,
+  });
   /* try to minimize */
 
   return usersWithoutPassword;
@@ -24,7 +29,8 @@ const getAllUserFromDB = async () => {
 
   const requireFieldData = await mongoose
     .model("User")
-    .find({}, { userName: 1, fullName: 1, age: 1, email: 1, address: 1 });
+    .find({})
+    .select({ _id: 0, userName: 1, fullName: 1, age: 1, email: 1, address: 1 });
 
   return requireFieldData;
 };
@@ -35,7 +41,7 @@ const getSingleUserFromDB = async (singleUserData: number) => {
   const SingleUserWithoutPassword = await mongoose
     .model("User")
     .find({ userId: singleUserData })
-    .select("-password");
+    .select({ _id: 0, userName: 1, fullName: 1, age: 1, email: 1, address: 1 });
 
   if (SingleUserWithoutPassword.length === 0) {
     throw new Error("User is not found");
@@ -48,14 +54,24 @@ const updateSingleUserToDB = async (
   updateUserId: number,
   updateUserData: TUser
 ) => {
-
   if (!(await userModel.isUserExist(updateUserId))) {
     throw new Error("User is not exist!");
   }
 
   const updateUserToDB = await userModel
-    .findOne({ userId: updateUserId })
-    .updateOne({ $set: updateUserData });
+    .findOneAndUpdate({ userId: updateUserId }, { $set: updateUserData })
+    .select({
+      _id: 0,
+      userId: 1,
+      userName: 1,
+      fullName: 1,
+      age: 1,
+      email: 1,
+      isActive: 1,
+      hobbies: 1,
+      address: 1,
+    });
+  // .updateOne();
 
   console.log(updateUserToDB);
   return updateUserToDB;
