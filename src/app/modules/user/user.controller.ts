@@ -66,6 +66,31 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
+const updateSingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const updateData = req.body;
+
+    // console.log(userId,updateData);
+
+    const updateUserResult = await userService.updateSingleUserToDB(
+      Number(userId),updateData
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User updated successfully!",
+      data: updateUserResult,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Something went wrong",
+      result: err,
+    });
+  }
+};
+
 const deleteAUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
@@ -93,5 +118,6 @@ export default {
   createUser,
   getAllUsers,
   getSingleUser,
+  updateSingleUser,
   deleteAUser,
 };

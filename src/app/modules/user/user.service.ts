@@ -44,8 +44,19 @@ const getSingleUserFromDB = async (singleUserData: number) => {
   return SingleUserWithoutPassword;
 };
 
+const updateSingleUserToDB = async (
+  updateUserId: number,
+  updateUserData: TUser
+) => {
+  const updateUserToDB = await userModel
+    .findOne({ userId: updateUserId })
+    .updateOne({ $set: updateUserData });
+
+  console.log(updateUserToDB);
+  return updateUserToDB;
+};
+
 const deleteSingleUserFromDB = async (deleteUserData: number) => {
-  
   if (!(await userModel.isUserExist(deleteUserData))) {
     throw new Error("User already deleted!");
   }
@@ -64,5 +75,6 @@ export default {
   createUserToDB,
   getAllUserFromDB,
   getSingleUserFromDB,
+  updateSingleUserToDB,
   deleteSingleUserFromDB,
 };
