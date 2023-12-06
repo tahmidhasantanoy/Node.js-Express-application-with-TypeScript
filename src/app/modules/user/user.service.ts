@@ -48,6 +48,11 @@ const updateSingleUserToDB = async (
   updateUserId: number,
   updateUserData: TUser
 ) => {
+  
+  if (!(await userModel.isUserExist(updateUserId))) {
+    throw new Error("User is not exist!");
+  }
+
   const updateUserToDB = await userModel
     .findOne({ userId: updateUserId })
     .updateOne({ $set: updateUserData });
