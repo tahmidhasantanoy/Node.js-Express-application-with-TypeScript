@@ -40,17 +40,23 @@ const getSingleUserFromDB = async (singleUserData: number) => {
   if (SingleUserWithoutPassword.length === 0) {
     throw new Error("User is not found");
   }
-  
+
   return SingleUserWithoutPassword;
 };
 
 const deleteSingleUserFromDB = async (deleteUserData: number) => {
+  
+  if (!(await userModel.isUserExist(deleteUserData))) {
+    throw new Error("User already deleted!");
+  }
+
   const deleteUserFromDB = await userModel.updateOne(
     {
       userId: deleteUserData,
     },
     { isDeleted: true }
   );
+
   return deleteUserFromDB;
 };
 
