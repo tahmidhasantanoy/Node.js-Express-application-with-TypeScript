@@ -4,6 +4,7 @@ import {
   TName,
   TOrder,
   TUser,
+  userInterfaceModel,
   // userInterfaceModel,
 } from "./user.interface";
 import bcrypt from "bcrypt";
@@ -26,7 +27,7 @@ const userOrderSchema = new Schema<TOrder>({
   quantity: { type: Number, required: true },
 });
 
-const userSchema = new Schema<TUser/* , userInterfaceModel */>({
+const userSchema = new Schema<TUser, userInterfaceModel>({
   userId: {
     type: Number,
     required: true,
@@ -49,14 +50,14 @@ const userSchema = new Schema<TUser/* , userInterfaceModel */>({
 });
 
 // Mongoose method :
-// userSchema.statics.isUserExist = async function(id : number){
-//   await User.findOne({userId : id})
-// }
+
+userSchema.statics.isUserExist = async function (userId: number) {
+  const existingUser = await userModel.findOne({ userId: userId });
+  return existingUser;
+};
 
 // Mongoose Middleware :
 userSchema.pre("save", async function () {
-
-  console.log(this);
   const password = this.password;
 
   this.password = await bcrypt.hash(password, Number(config.saltRound));
@@ -79,4 +80,4 @@ userSchema.pre("findOne", function (next) {
   next();
 });
 
-export const userModel = model<TUser/* , userInterfaceModel */>("User", userSchema);
+export const userModel = model<TUser, userInterfaceModel>("User", userSchema);

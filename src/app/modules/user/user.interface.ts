@@ -1,6 +1,6 @@
 // import { Schema, model, connect } from "mongoose";
 
-// import { Model } from "mongoose";
+import { Model } from "mongoose";
 
 export type TName = {
   firstName: string;
@@ -40,6 +40,6 @@ export type TUser = {
 // export type userModel = Model<TUser,Record<string, never>,userMethods>
 
 // creating static method :
-// export interface userInterfaceModel extends Model<TUser> {
-//   isUserExist(id: number): Promise<TUser>;
-// }
+export interface userInterfaceModel extends Model<TUser> {
+  isUserExist(userId: number): Promise<TUser>;
+}

@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
 import { TUser } from "./user.interface";
-import {  userModel } from "./user.model";
+import { userModel } from "./user.model";
 
 const createUserToDB = async (userData: TUser) => {
+  
+  if (await userModel.isUserExist(userData.userId)) {
+    console.log("exist");
+    throw new Error("User already exist");
+  }
+
   const storeUserData = await userModel.create(userData);
 
   const usersWithoutPassword = await mongoose
