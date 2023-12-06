@@ -62,4 +62,10 @@ userSchema.pre("find", function (next) {
   next();
 });
 
+userSchema.pre("findOne", function (next) {
+  
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
 export const userModel = model<TUser>("User", userSchema);
