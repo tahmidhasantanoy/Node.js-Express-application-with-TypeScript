@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { TUser } from "./user.interface";
-import { userModel } from "./user.model";
+import {  userModel } from "./user.model";
 
 const createUserToDB = async (userData: TUser) => {
   const storeUserData = await userModel.create(userData);

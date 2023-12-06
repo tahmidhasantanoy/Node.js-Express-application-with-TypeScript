@@ -1,5 +1,11 @@
 import { Schema, model /* connect */ } from "mongoose";
-import { TAddress, TName, TOrder, TUser } from "./user.interface";
+import {
+  TAddress,
+  TName,
+  TOrder,
+  TUser,
+  // userInterfaceModel,
+} from "./user.interface";
 import bcrypt from "bcrypt";
 import config from "../../config";
 
@@ -20,7 +26,7 @@ const userOrderSchema = new Schema<TOrder>({
   quantity: { type: Number, required: true },
 });
 
-const userSchema = new Schema<TUser>({
+const userSchema = new Schema<TUser/* , userInterfaceModel */>({
   userId: {
     type: Number,
     required: true,
@@ -42,12 +48,18 @@ const userSchema = new Schema<TUser>({
   isDeleted: { type: Boolean, default: false },
 });
 
+// Mongoose method :
+// userSchema.statics.isUserExist = async function(id : number){
+//   await User.findOne({userId : id})
+// }
+
 // Mongoose Middleware :
 userSchema.pre("save", async function () {
+
+  console.log(this);
   const password = this.password;
 
   this.password = await bcrypt.hash(password, Number(config.saltRound));
-  // console.log("before stored");
 });
 
 userSchema.post("save", async function (doc, next) {
@@ -63,9 +75,8 @@ userSchema.pre("find", function (next) {
 });
 
 userSchema.pre("findOne", function (next) {
-  
   this.find({ isDeleted: { $ne: true } });
   next();
 });
 
-export const userModel = model<TUser>("User", userSchema);
+export const userModel = model<TUser/* , userInterfaceModel */>("User", userSchema);

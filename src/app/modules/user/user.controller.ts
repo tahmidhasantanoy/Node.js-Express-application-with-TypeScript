@@ -80,7 +80,7 @@ const deleteAUser = async (req: Request, res: Response) => {
       message: "User deleted successfully!",
       data: deleteUserResult,
     });
-  } catch (err : any) {
+  } catch (err: any) {
     res.status(500).json({
       success: false,
       message: err.message || "Something went wrong",
