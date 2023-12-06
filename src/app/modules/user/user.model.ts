@@ -49,8 +49,8 @@ const userSchema = new Schema<TUser, userInterfaceModel>({
   isDeleted: { type: Boolean, default: false },
 });
 
-// Mongoose method :
 
+// Mongoose static method :
 userSchema.statics.isUserExist = async function (userId: number) {
   const existingUser = await userModel.findOne({ userId: userId });
   return existingUser;

@@ -3,7 +3,6 @@ import { TUser } from "./user.interface";
 import { userModel } from "./user.model";
 
 const createUserToDB = async (userData: TUser) => {
-  
   if (await userModel.isUserExist(userData.userId)) {
     console.log("exist");
     throw new Error("User already exist");
@@ -37,6 +36,11 @@ const getSingleUserFromDB = async (singleUserData: number) => {
     .model("User")
     .find({ userId: singleUserData })
     .select("-password");
+
+  if (SingleUserWithoutPassword.length === 0) {
+    throw new Error("User is not found");
+  }
+  
   return SingleUserWithoutPassword;
 };
 
