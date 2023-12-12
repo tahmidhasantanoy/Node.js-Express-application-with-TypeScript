@@ -10,16 +10,18 @@ const createUserToDB = async (userData: TUser) => {
 
   const storeUserData = await userModel.create(userData);
 
-  const usersWithoutPassword = await mongoose.model("User").find({}).select({
-    _id: 0,
-    userId: 1,
-    userName: 1,
-    fullName: 1,
-    age: 1,
-    email: 1,
-    address: 1,
-  });
-
+  const usersWithoutPassword = await mongoose
+    .model("User")
+    .find({ userId: userData.userId })
+    .select({
+      _id: 0,
+      userId: 1,
+      userName: 1,
+      fullName: 1,
+      age: 1,
+      email: 1,
+      address: 1,
+    });
 
   return usersWithoutPassword;
 };
@@ -71,7 +73,6 @@ const updateSingleUserToDB = async (
       hobbies: 1,
       address: 1,
     });
-
 
   console.log(updateUserToDB);
   return updateUserToDB;
