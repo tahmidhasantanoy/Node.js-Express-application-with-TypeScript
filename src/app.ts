@@ -16,5 +16,4 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Sending response to Node.js Express Application");
 });
 
-
 export default app;

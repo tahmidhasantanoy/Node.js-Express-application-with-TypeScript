@@ -6,6 +6,8 @@ const createUser = async (req: Request, res: Response) => {
   try {
     const userData = req.body.user;
 
+
+    //why zod after mongoose? ||  Why zod validation come here & what is the advantage of zod?
     const zodValidationUserData = userValidationSchema.parse(userData);
 
     const serviceResult = await userService.createUserToDB(

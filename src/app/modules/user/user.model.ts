@@ -1,4 +1,7 @@
+/* Model are created based on schema */
+/* Schema & Model are created based on mongoose */
 import { Schema, model /* connect */ } from "mongoose";
+import bcrypt from "bcrypt";
 import {
   TAddress,
   TName,
@@ -7,7 +10,6 @@ import {
   userInterfaceModel,
   // userInterfaceModel,
 } from "./user.interface";
-import bcrypt from "bcrypt";
 import config from "../../config";
 
 const userFullNameSchema = new Schema<TName>({
@@ -80,4 +82,7 @@ userSchema.pre("findOne", function (next) {
   next();
 });
 
+
+// Mongoose model create based on schema :
+// Same as photographer Schema model in DreamCather photographer.js
 export const userModel = model<TUser, userInterfaceModel>("User", userSchema);
